@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    touch-action: manipulation;
+}
+
+div, nav, section, header, footer {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #111;
+}
