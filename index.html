@@ -62,11 +62,6 @@
 		</h1>
 	</div>
 
-	<div id="annoyingCookie">
-		<span>This website uses cookies to ensure you get the best experience on our website. By using our website you consent to all cookies in accordance with our Cookie Policy.</span>
-		<a id="cookieOK">Accept</a>
-	</div>
-
 	<script>
 		// The Annoying Background
 		var colorList = [
@@ -111,16 +106,5 @@
 				annoyingBackground.appendChild(element);
 			}
 		}
-
-		// Annoying Cookie permission
-		var annoyingCookie = document.getElementById('annoyingCookie');
-		var cookieOK = document.getElementById('cookieOK');
-		setTimeout(() => {
-			annoyingCookie.classList = "in";
-		}, 1000);
-
-		cookieOK.addEventListener("click", function() {
-			annoyingCookie.classList = "";
-		});
 	</script>
 </body>
