@@ -67,30 +67,88 @@
 			left: 0;
 		}
 
+		header .logo {
+			transform: translate(0, -18px);
+		}
+
 		.logo.wrapper {
 			display: inline-flex;
 			background: #fff;
 			padding: 10px;
-			transform: translate(0, -18px);
 		}
 
-		.logo.container {
+		.logo>.container {
 			border: 3px solid #000;
 			padding: 30px 15px 15px 15px;
 		}
 
-		.logo.top {
-			margin-left: -.1em;
+		.logo .top {
 			margin-bottom: 0.1em;
 			font-size: 6em;
-			letter-spacing: -0.12em;
+			letter-spacing: -0.05em;
 			line-height: .8em;
 			text-align: center;
 		}
 
-		.logo.mid {
+		.logo .mid {
 			font-size: 2em;
 			line-height: 1em;
+		}
+
+		.logo .bot {
+			font-size: 1.2em;
+			line-height: 1em;
+			letter-spacing: .1em;
+			text-align: center;
+		}
+
+		.nav {
+			float: right;
+			list-style: none;
+
+		}
+
+		.nav>li {
+			display: inline;
+		}
+
+		.nav>li>a {
+			position: relative;
+			color: #fff;
+			font-size: 1.5em;
+			text-decoration: none;
+			margin: 0 20px;
+			padding: 0 5px;
+			opacity: .5;
+			transition: opacity 0.2s ease-out;
+		}
+
+		.nav>li>a::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: #fff;
+			opacity: 0;
+			transition: opacity 0.2s ease-out;
+		}
+
+		.nav>li>a.active,
+		.nav>li>a:hover {
+			opacity: 1;
+		}
+
+		.nav>li>a.active::after,
+		.nav>li>a:hover::after {
+			opacity: 1;
+		}
+
+		/* Misc */
+		#fp-nav ul li a span,
+		.fp-slidesNav ul li a span {
+			background: #fff !important;
 		}
 	</style>
 
@@ -103,27 +161,39 @@
 
 <body>
 	<header>
-		<div class="screen container">
+		<div class="screen container saira">
 			<div class="logo wrapper flex column center">
-				<div class="logo container">
-					<div class="logo top">
-						<span class="saira bold black">!</span>
-						<span class="saira bold pink">?</span>
+				<div class="container">
+					<div class="top">
+						<span class="bold black">!</span>
+						<span class="bold pink">?</span>
 					</div>
-					<div class="logo mid">
-						<span class="saira medium black">V!T</span>
-						<span class="saira medium pink">?INK</span>
+					<div class="mid">
+						<span class="medium black">V!T</span>
+						<span class="medium pink">?INK</span>
+					</div>
+					<div class="bot">
+						<span class="light">CHOCOLATE</span>
 					</div>
 				</div>
 			</div>
+
+			<ul class="nav">
+				<li>
+					<a href="#ch*mSocola" class="active">CH*M SÔCÔLA</a>
+				</li>
+				<li>
+					<a href="#c*tSocola">C*T SÔCÔLA</a>
+				</li>
+			</ul>
 		</div>
 	</header>
 
 	<div class="main container">
-		<div class="section" id="chimSocola" data-anchor="chimSocola" data-tooltip="Ch*m Socola">
+		<div class="section" id="chimSocola" data-tooltip="Ch*m Socola">
 			alo
 		</div>
-		<div class="section" id="cutSocola" data-anchor="cutSocola" data-tooltip="C*t Socola">
+		<div class="section" id="cutSocola" data-tooltip="C*t Socola">
 			alo
 		</div>
 	</div>
@@ -134,13 +204,23 @@
 		(() => {
 			class VitPink {
 				query = document.querySelector.bind(document)
+				queryAll = document.querySelectorAll.bind(document)
 				mainContainer = this.query('.main.container')
+				navItems = this.queryAll('.nav > li > a')
 
 				constructor() {
 					this.fullpage = new fullpage('.main.container', {
-						anchors: ['ch*mSocola', 'c*tSocola', '3rdPage'],
+						anchors: ['ch*mSocola', 'c*tSocola'],
 						navigation: true,
-						sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#000'],
+						sectionsColor: ['#4BBFC3', '#FFBBFF'],
+					})
+
+					this.navItems.addEventListener('click', e => {
+						debugger
+						for (const item of this.navItems) {
+							item.classList.remove('active')
+						}
+						e.target.classList.add('active')
 					})
 				}
 			}
