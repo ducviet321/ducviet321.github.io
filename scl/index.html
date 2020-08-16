@@ -1,0 +1,151 @@
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>🍫 Vit Pink Chocolate 🍫</title>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-y: hidden;
+			font-family: Arial, Helvetica, sans-serif;
+			background: #333;
+			/* Temp for dev */
+		}
+
+		.saira {
+			font-family: 'Saira Extra Condensed', sans-serif;
+		}
+
+		.bold {
+			font-weight: bold;
+		}
+
+		.medium {
+			font-weight: 500;
+		}
+
+		.light {
+			font-weight: 300;
+		}
+
+		.black {
+			color: #000;
+		}
+
+		.pink {
+			color: #ff6d7d;
+		}
+
+		.flex {
+			display: flex;
+		}
+
+		.inline-block {
+			display: inline-block;
+		}
+
+		.flex.column {
+			flex-direction: column;
+		}
+
+		.flex.center {
+			justify-content: center;
+			align-items: center;
+		}
+
+		.screen.container {
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		header {
+			z-index: 2;
+			position: fixed;
+			width: 100%;
+			left: 0;
+		}
+
+		.logo.wrapper {
+			display: inline-flex;
+			background: #fff;
+			padding: 10px;
+			transform: translate(0, -18px);
+		}
+
+		.logo.container {
+			border: 3px solid #000;
+			padding: 30px 15px 15px 15px;
+		}
+
+		.logo.top {
+			margin-left: -.1em;
+			margin-bottom: 0.1em;
+			font-size: 6em;
+			letter-spacing: -0.12em;
+			line-height: .8em;
+			text-align: center;
+		}
+
+		.logo.mid {
+			font-size: 2em;
+			line-height: 1em;
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="./assets/lib/fullpagejs/fullpage.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300;400;500;700&display=swap"
+		rel="stylesheet">
+
+
+</head>
+
+<body>
+	<header>
+		<div class="screen container">
+			<div class="logo wrapper flex column center">
+				<div class="logo container">
+					<div class="logo top">
+						<span class="saira bold black">!</span>
+						<span class="saira bold pink">?</span>
+					</div>
+					<div class="logo mid">
+						<span class="saira medium black">V!T</span>
+						<span class="saira medium pink">?INK</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="main container">
+		<div class="section" id="chimSocola" data-anchor="chimSocola" data-tooltip="Ch*m Socola">
+			alo
+		</div>
+		<div class="section" id="cutSocola" data-anchor="cutSocola" data-tooltip="C*t Socola">
+			alo
+		</div>
+	</div>
+
+	<script type="text/javascript" src="./assets/lib/fullpagejs/fullpage.min.js"></script>
+
+	<script>
+		(() => {
+			class VitPink {
+				query = document.querySelector.bind(document)
+				mainContainer = this.query('.main.container')
+
+				constructor() {
+					this.fullpage = new fullpage('.main.container', {
+						anchors: ['ch*mSocola', 'c*tSocola', '3rdPage'],
+						navigation: true,
+						sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#000'],
+					})
+				}
+			}
+
+			window.vitPink = new VitPink()
+		})()
+	</script>
+</body>
