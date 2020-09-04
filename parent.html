@@ -1,0 +1,17 @@
+<head>
+	<title>Parent</title>
+</head>
+<body>
+	I'm parent.localhost.com
+	
+	<iframe id="iamiframe" src="http://iframe.localhost.com/iframe.html" width="300px" height="100px"></iframe>
+
+	<script>
+		document.domain = "localhost.com"
+		window.cookie = "cookie from parent"
+		// (() => {
+		// 	window.session = "[Your sessionID]"
+		// 	window.nonce = "[Your Nonce]"
+		// })()
+	</script>
+</body>

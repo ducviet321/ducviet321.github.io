@@ -2,7 +2,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>🍫 Vit Pink Chocolate 🍫</title>
+	<title>Vit Pink Chocolate 🍫</title>
 	<style>
 		html,
 		body {
@@ -12,6 +12,10 @@
 			font-family: Arial, Helvetica, sans-serif;
 			background: #333;
 			/* Temp for dev */
+		}
+
+		h1, h2, h3, h4, h5 {
+			margin: 0;
 		}
 
 		.saira {
@@ -145,6 +149,41 @@
 			opacity: 1;
 		}
 
+		/* Sections */
+		.section .content {
+			width: 100%;
+			height: 100%;
+		}
+
+		.section .box {
+			z-index: 3;
+			position: absolute;
+			width: 350px;
+			background: rgb(255,255,255);
+			background: linear-gradient(45deg, rgba(195,195,195,0.7) 0%, rgba(255,255,255,0.7) 100%);
+			backdrop-filter: blur(10px);
+		}
+
+		.section .send-message {
+			
+		}
+
+		#chimSocola .content {
+			background: url(./assets/images/slide1.png) center no-repeat;
+			background-size: cover;
+		}
+
+		#chimSocola .box {
+			right: 10vw;
+			top: 50%;
+			transform: translateY(-50%);
+			padding: 20px;
+			border-radius: 15px;
+			color: #000;
+		}
+
+		
+
 		/* Misc */
 		#fp-nav ul li a span,
 		.fp-slidesNav ul li a span {
@@ -191,7 +230,28 @@
 
 	<div class="main container">
 		<div class="section" id="chimSocola" data-tooltip="Ch*m Socola">
-			alo
+			<div class="content">
+				<div class="box">
+					<div class="flex" style="align-items: center; justify-content: space-between;">
+						<h1 class="title saira" style="line-height: 1em;">SOCOLA</h1>
+						<h2 class="price pink saira light">190.000 VND</h2>
+					</div>
+
+					<h3 class="subtitle saira light">Height: 15cm</h3>
+
+					<p>
+						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non hic suscipit ad modi consequuntur repudiandae 
+						excepturi est cupiditate fugiat, dolore optio esse ullam eum beatae quibusdam error. Dolores, autem repudiandae?
+					</p>
+
+					<div class="send-message saira flex center column" style="width: 100%">
+						<span class="prepend">FREE SHIP NOI THANH HA NOI</span>
+						<a href="#" class="action">
+							Send Message
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="section" id="cutSocola" data-tooltip="C*t Socola">
 			alo
@@ -211,21 +271,22 @@
 				constructor() {
 					this.fullpage = new fullpage('.main.container', {
 						anchors: ['ch*mSocola', 'c*tSocola'],
-						navigation: true,
-						sectionsColor: ['#4BBFC3', '#FFBBFF'],
+						// navigation: true,
+						sectionsColor: ['#ffbbc2', '#c3e8ed'],
 					})
 
-					this.navItems.addEventListener('click', e => {
-						debugger
-						for (const item of this.navItems) {
-							item.classList.remove('active')
-						}
-						e.target.classList.add('active')
+					this.navItems.forEach(item => {
+						item.addEventListener('click', e => {
+							for (const item of this.navItems) {
+								item.classList.remove('active')
+							}
+							e.target.classList.add('active')
+						})
 					})
 				}
 			}
 
-			window.vitPink = new VitPink()
-		})()
+				window.vitPink = new VitPink()
+			}) ()
 	</script>
 </body>
