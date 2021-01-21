@@ -210,6 +210,15 @@
             preContent.prepend(`[${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}] ${message}\n`);
         }
 
+        // Either read from URI or Folder ID
+        function smartGetFolderId() {
+            let result = /.*folders\/(.*)\/?/.exec(inputFolderId.value)
+
+            if (result) return result[1]
+
+            return inputFolderId.value
+        }
+
         /**
          * Analyze a single folders
          * 1. Get all folders recursively
@@ -229,7 +238,7 @@
 
             appendPre('Drive Analytic sequences initiated...');
             let startTime = (new Date()).getTime();
-            let folderId = inputFolderId.value;
+            let folderId = smartGetFolderId();
             btnDownload.classList.add('disabled');
 
             resultFolders = [{
