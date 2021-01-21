@@ -192,7 +192,7 @@
                         readable.unshift(`${item.id} (${item.role})`);
                     }
                 } else if (item.emailAddress != owner.emailAddress) {
-                    readable.push(`${item.displayName} (${item.emailAddress})`);
+                    readable.push(`${item.displayName} (${item.emailAddress}${item.role ? ' ' + item.role : ''})`);
                 }
             });
 
