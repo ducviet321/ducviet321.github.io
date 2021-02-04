@@ -164,7 +164,7 @@ img.demo {
 
 #content {
     max-width: 800px;
-    max-height: 300px;
+    max-height: 200px;
     font-size: 1em;
     overflow-y: auto;
     overflow-x: hidden;
