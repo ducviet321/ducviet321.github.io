@@ -265,6 +265,7 @@
             let startTime = (new Date()).getTime();
             let folderId = smartGetFolderId();
             btnDownload.classList.add('disabled');
+            btnAnalyze.innerText = 'Analyzing...'
 
             resultFolders = [{
                 id: folderId,
@@ -288,6 +289,8 @@
             totalSecond = totalSecond > 9 ? totalSecond : '0' + totalSecond;
 
             appendPre(`Total time ${totalMinute}:${totalSecond}`);
+
+            btnAnalyze.innerText = 'Analyze'
         }
 
 
