@@ -8,7 +8,7 @@ body, html {
     font-family: 'Rubik', sans-serif;
 }
 
-button {
+button, a.button {
     appearance: none;
     border: none;
     font-weight: bold;
