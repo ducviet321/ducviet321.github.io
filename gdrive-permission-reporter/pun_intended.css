@@ -8,6 +8,20 @@ body, html {
     font-family: 'Rubik', sans-serif;
 }
 
+button {
+    appearance: none;
+    border: none;
+    font-weight: bold;
+    padding: 8px 10px;
+    border-radius: 20px;
+    background: linear-gradient(47deg, rgba(252,196,145,1) 0%, rgb(255, 169, 95) 100%);
+}
+
+button:hover {
+    cursor: pointer;
+    background: linear-gradient(47deg, rgb(214, 164, 118) 0%, rgb(221, 134, 58) 100%);
+}
+
 .main.container {
     display: flex;
     flex-direction: row;
@@ -27,6 +41,9 @@ body, html {
 }
 
 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 30px 40px;
 }
 
@@ -37,8 +54,8 @@ nav {
 }
 
 .logo {
-    color: #ffa84e;
-    font-size: 1.2em;
+    color: #fcc491;
+    font-size: .8em;
 }
 
 .cam {
@@ -46,9 +63,27 @@ nav {
     height: min(100vh, 40vw);
 }
 
-.context.container {
+.intro.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0 0 40px 40px;
+}
+
+.context.container {
     overflow: hidden;
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.context .captain {
+    font-size: 2em;
+    background: rgb(132,147,164);
+    background: linear-gradient(47deg, rgba(132,147,164,1) 0%, rgba(196,205,219,1) 50%, rgba(140,152,168,1) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .eg{
@@ -64,12 +99,15 @@ nav {
     color: #ddd;
 }
 
+img.demo {
+    width: 800px;
+}
+
 .demo.container {
     position: relative;
-    margin-top: auto;
     width: 900px;
     overflow: hidden;
-    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .demo .fade {
@@ -90,4 +128,43 @@ nav {
     height: 100%;
     background: rgb(60,60,71);
     background: linear-gradient(-90deg, rgb(20 20 32 / 42%) 0%, rgb(255 255 255 / 0%) 40%);
+}
+
+.steps {
+    position: relative;
+    margin: 0 40px;
+}
+
+.step {
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-color: #111;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+.center.container {
+    display: flex;
+    justify-content: center;
+}
+
+#inputFolderId {
+    appearance: none;
+    border: none;
+    padding: 12px 15px;
+    margin-right: 15px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 10px #00000030;
+}
+
+#content {
+    max-width: 800px;
+    max-height: 300px;
+    font-size: 1em;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

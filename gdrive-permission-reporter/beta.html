@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Driana - Google Drive Analytic</title>
+    <title>Driana.</title>
     <meta charset="utf-8" />
     <link href="pun_intended.css" rel="stylesheet">
 </head>
@@ -15,32 +15,49 @@
         </div>
         <div class="right container">
             <nav>
-                <div class="logo">
+                <div class="left logo">
                     <span class="title">Driana.</span>
                     <span class="subtitle">Google Drive Analytic</span>
                 </div>
+
+                                
+                <div class="right">
+                    <button id="authorize_button" style="display: none">Login</button>
+                    <button id="btnDownload" style="display: none">Download</button>
+                    <button id="signout_button" style="visibility: hidden">Logout</button>
+                </div>
             </nav>
 
-            <div class="context container">
-                <p>
-                    Quickly get list of files inside a Google Drive Folder and finds out which files are being shared to whom.
-                    This tool will scan everything in a given Google Drive Folder and create a downloadable CSV report.
-                </p>
-                
+            <div class="intro container">
+                <div class="context container">
+                    <div class="captain">
+                        Scan Folder & Files in Google Drive
+                    </div>
+                    <p>
+                        Quickly finds out which files are being shared to whom.
+                    </p>
+                </div>
+
                 <div class="demo container">
                     <img src="demo.jpg" alt="Google Drive Permission Reporter CSV" class="demo">
                     <div class="fade"></div>
                 </div>
-                
-                <p>
-                    Please <b>login</b> to your Google Account using authentication button below, 
-                    then <b>paste the link</b> to your Google Drive Folder
-                </p>
-                <p class="eg">Link Example: https://drive.google.com/drive/u/0/folders/15ZSswAZ0OQegg6Z9ES6SF9AePuMJF+Sb</p>
             </div>
 
-            <button id="authorize_button">Login</button>
+            <div class="center container">
+                <input type="text" id="inputFolderId" placeholder="Paste your Google Drive Folder URL here...">
+                <button id="btnAnalyze">Analyze</button>
+            </div>
 
+            <div class="center container">
+                <pre id="content"></pre>
+            </div>
+
+
+            <div class="boxes">
+                <div class="box step-1">
+                </div>
+            </div>
         </div>
     </div>
 
