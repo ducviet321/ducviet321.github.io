@@ -169,3 +169,14 @@ img.demo {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.footer.container {
+    margin-top: auto;
+    padding: 40px 0 10px 40px;
+}
+
+.footer a {
+    font-size: .8em;
+    color: #aaaab3;
+    margin-right: 15px;
+}
