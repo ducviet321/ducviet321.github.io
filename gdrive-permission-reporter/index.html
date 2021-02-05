@@ -136,11 +136,15 @@
             if (isSignedIn) {
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
+                
+                let profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+                signoutButton.innerHTML = profile.getName() + ' • Logout'
                 // listFiles();
                 // handleAnalyze();
             } else {
                 authorizeButton.style.display = 'block';
                 signoutButton.style.display = 'none';
+                signoutButton.innerHTML = 'Logout'
             }
         }
 
