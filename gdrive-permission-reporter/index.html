@@ -39,8 +39,8 @@
                 </div>
 
                 <div class="demo container">
-                    <img src="demo.jpg" alt="Google Drive Permission Reporter CSV" class="demo">
-                    <div class="fade"></div>
+                    <img src="demo.png" alt="Google Drive Permission Reporter CSV" class="demo">
+                    <!-- <div class="fade"></div> -->
                 </div>
             </div>
 
@@ -136,7 +136,7 @@
             if (isSignedIn) {
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
-                
+
                 let profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
                 signoutButton.innerHTML = profile.getName() + ' • Logout'
                 // listFiles();

@@ -4,7 +4,7 @@ body, html {
     padding: 0;
     margin: 0;
     color: #aaaab3;
-    background-color: #141420;
+    background-color: #3a3a45;
     font-family: 'Rubik', sans-serif;
 }
 
@@ -30,6 +30,7 @@ button:hover {
 
 .left.container {
     position: relative;
+    background: #161924;
 }
 
 .right.container {
