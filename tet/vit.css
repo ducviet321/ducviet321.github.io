@@ -74,6 +74,7 @@ html, body {
     cursor: pointer;
     transition: background 0.5s ease-out;
     box-shadow: 0 0 50px 1px #44444417;
+    font-weight: 600;
 }
 
 .card:hover {
@@ -85,3 +86,13 @@ html, body {
     padding: 20px;
     white-space: pre;
 }
+
+@media (orientation: portrait) {
+    .main.container {
+      flex-flow: column nowrap;
+    }
+
+    .right {
+        overflow: initial;
+    }
+  }
