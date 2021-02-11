@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tin nhắn chúc Tết 2021</title>
+        <meta charset="utf-8" />
+        <link href="vit.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+
+    </head>
+
+    <body>
+        <div class="main container">
+            <div class="left">
+                <div class="description pre">
+                    Tin nhắn chúc Tết Tân Sửu 2021
+                </div>
+                <div class="headline">
+                    Ngắn gọn, ý nghĩa.
+                </div>
+                <div class="description">
+                    Muốn chúc Tết nhưng lại không nghĩ ra gì để nói T.T Hãy tham khảo những dòng sau và đừng quên sửa lại cho hợp với người mình gửi nhé :3
+                </div>
+
+                <div class="description">
+                    <b>Tips: Nhấn vào tin nhắn để copy nha ;)</b>
+                </div>
+            </div>
+            <div class="right">
+                <div class="card">
+                    <i class="copy"></i>
+                    <div class="content">
+                        Chúc mừng sinh nhật, sinh nhật zui zẻ nha!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback: Copying text command was ' + msg);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+            }
+            function copyTextToClipboard(text) {
+            if (!navigator.clipboard) {
+                fallbackCopyTextToClipboard(text);
+                return;
+            }
+            navigator.clipboard.writeText(text).then(function() {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+            }
+
+            var cards = document.querySelectorAll('.card > .content')
+
+            cards.forEach(item => {
+                item.addEventListener('click', function(event) {
+                    copyTextToClipboard(item.innerHTML);
+                })
+            });
+        </script>
+    </body>
+</html>

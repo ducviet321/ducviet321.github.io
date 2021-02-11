@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #eee;
+    color: #222323;
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url(bg.png);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main.container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: 100%;
+    padding: 40px;
+}
+
+.main.container > div {
+    flex: 1 0 50%;
+}
+
+
+.pre.description {
+    font-weight: bold;
+}
+
+.pre.description::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 88px;
+    background: #adadad;
+}
+
+.headline {
+    font-weight: bold;
+    font-size: 3em;
+    padding: 10px 0 20px;
+}
+
+.description {
+    max-width: 500px;
+    padding: 20px 0;
+    font-weight: 600;
+}
+
+.right {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: #ffffff55;
+    border-radius: 20px;
+    margin-top: 20px;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: background 0.5s ease-out;
+    box-shadow: 0 0 50px 1px #44444417;
+}
+
+.card:hover {
+    background: #ffffffaa;
+}
+
+
+.card > .content {
+    padding: 20px;
+}
