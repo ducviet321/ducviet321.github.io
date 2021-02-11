@@ -59,7 +59,7 @@ html, body {
     height: 100%;
     width: 100%;
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
 }
@@ -68,7 +68,7 @@ html, body {
     background: #ffffff55;
     border-radius: 20px;
     margin-top: 20px;
-    max-width: 500px;
+    width: 500px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     cursor: pointer;
