@@ -83,4 +83,5 @@ html, body {
 
 .card > .content {
     padding: 20px;
+    white-space: pre;
 }
