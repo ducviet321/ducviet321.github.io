@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Xiaomi Logo Creating Tool - Create new Xiaomi-like logo</title>
+    <meta charset="utf-8" />
+    <link href="pun_intended.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="main container" id="mainContainer">
+        <div class="right container">
+            <nav>
+                <div class="left logo">
+                    <span class="title">Vit's</span>
+                    <span class="subtitle">Xiaomi Logo Creating Tool</span>
+                </div>
+            </nav>
+
+            <div class="intro container">
+                <div class="context container">
+                    <div class="captain">
+                        Your new 300.000$ logo in a second
+                    </div>
+                    <p>
+                        Xiaomi just unveiled their brand new logo as part of an overhaul of its brand identity.
+                        Do you know it cost around 2 million Chinese Yuan and two years to complete by a Japanese
+                        veteran. I've spent my entire 45 minutes to recreate this innovation with a completely free
+                        tool, behold!
+                    </p>
+                </div>
+            </div>
+
+            <div class="center container">
+                <p style="color: #ff2a77">Drop your logo image anywhere to "Alive"</p>
+            </div>
+
+            <div class="center container">
+                <div class="input container io" title="Click to upload your logo">
+                    <div class="wrapper">
+                        <img id="input">
+                    </div>
+                </div>
+
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABWklEQVR4Xu3aQQ4BURAE0JqFI1k5hJUb4FC4gQ2HsHIkG/nJSCaTERK6q+iyH3/q/e4RPb9D8U9XPD8M4AooLuAWKF4Afgi6BdwCxQXcAsULIPRXYA5g2wPvAFwVsaNaoIW/AJj1oW8AVgDOaghRAHsA61FYSYRMgOYhhxAFMG6BYTFIIUQBtMBLAMfBc0ASIRLgJxCiAeQRMgCkEbIAZBEyASQRsgHkEBgAUggsABkEJoAEAhuAjqAAQEVQAXgHYRExVFECeCCcngxNDgA23x6oGODboh9836u/z3/dAq/Ch80TFVqAFr5VKxuAGp4NQA/PBJAIzwKQCc8AkAqfDSAXPhNAMnwWgGz4DADp8NEA8uEjAcq/HJ06H1Dq9Xj5AxLlj8i0ci99SOqDwVDupex5QG7aidUMQN8C8g24AsgbQF/eFUDfAvINuALIG0Bf3hVA3wLyDZSvgDsgwm5BJwy5WQAAAABJRU5ErkJggg=="
+                    class="arrow-right">
+
+                <div class="output container io">
+                    <div class="wrapper">
+                        <img src="xiaomi_logo.png" id="output">
+                    </div>
+                </div>
+            </div>
+
+            <div class="center container">
+                <a id="btnDownload" class="button" style="display: none" download="XiaomiStyleLogo.png">Download</a>
+            </div>
+        </div>
+
+        <div class="input-file container">
+            <input type="file" id="inputFile">
+            <span>DROP YOUR LOGO HERE</span>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="html2canvas.min.js"></script>
+
+
+    <script type="text/javascript">
+        const mainContainer = document.querySelector('#mainContainer')
+        const inputFileContainer = document.querySelector('.input-file.container')
+        const inputFile = document.querySelector('#inputFile')
+        const inputContainer = document.querySelector('.input.container')
+        const input = document.querySelector('#input')
+        const output = document.querySelector('#output')
+        const outputContainer = document.querySelector('.output.container')
+        const btnDownload = document.querySelector('#btnDownload')
+
+        document.addEventListener("dragover", function (event) {
+            event.preventDefault()
+            inputFileContainer.style.display = 'block'
+        });
+
+        inputContainer.addEventListener("click", event => {
+            inputFile.click()
+        })
+
+        inputFile.addEventListener("change", function (event) {
+            inputFileContainer.style.display = 'none'
+
+            let fr = new FileReader();
+            fr.onload = () => {
+                // Display
+                input.src = fr.result;
+                output.src = fr.result;
+
+                // Download
+                html2canvas(outputContainer, { backgroundColor: null }).then(canvas => {
+                    btnDownload.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    btnDownload.click();
+                })
+                // domtoimage.toPng(outputWrapper).then(function (png) {
+                //     btnDownload.href = png
+                //     btnDownload.click();
+                // });
+            }
+
+            fr.readAsDataURL(event.currentTarget.files[0]);
+            event.currentTarget.value = null;
+        });
+    </script>
+</body>
+
+</html>
