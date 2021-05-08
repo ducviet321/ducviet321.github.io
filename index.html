@@ -1,110 +1,375 @@
 <head>
 	<meta charset="utf-8">
-	<title>Hello Phô Mai</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="assets/images/logo.png" type="image/png">
+
+
+	<title>Vit Pink Chocolate 🍫</title>
 	<style>
-		html, body {
+		html,
+		body {
 			margin: 0;
 			padding: 0;
 			overflow-y: hidden;
 			font-family: Arial, Helvetica, sans-serif;
+			font-size: 11pt;
+			background: #333;
 		}
 
-		.title {
-			font-family: Impact, "Arial Black", sans-serif;
+		div {
+			box-sizing: border-box;
+		}
+
+		a {
+			color: #edff6d;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #e4ff35;
+		}
+
+		h1, h2, h3, h4, h5 {
+			margin: 0;
+		}
+
+		.saira {
+			font-family: 'Saira Extra Condensed', sans-serif;
+		}
+
+		.bold {
 			font-weight: bold;
-			font-size: 4em;
-			color: white;
-			text-transform: uppercase;
 		}
 
-		.center-container {
-			position: absolute;
+		.medium {
+			font-weight: 500;
+		}
+
+		.light {
+			font-weight: 300;
+		}
+
+		.black {
+			color: #000;
+		}
+
+		.pink {
+			color: #ff6d7d;
+		}
+
+		.leaf {
+			color: #edff6d;
+		}
+
+		.wheat {
+    		color: wheat;
+		}
+
+		.flex {
 			display: flex;
-			align-items: center;
+		}
+
+		.inline-block {
+			display: inline-block;
+		}
+
+		.flex.column {
+			flex-direction: column;
+		}
+
+		.flex.center {
 			justify-content: center;
-
-			width: 100vw;
-			height: 100vh;
+			align-items: center;
 		}
 
-		#annoyingCookie {
+		.screen.container {
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		header {
+			z-index: 2;
 			position: fixed;
-			display: flex;
-			bottom: 0;5
-			padding: 20px 50px;
-			background: #8538bf;
-			color: white;
-			transition: transform .6s ease-out;
-			transform: translateY(100%);
+			width: 100%;
+			left: 0;
 		}
 
-		#annoyingCookie.in {
-			transform: translateY(0%);
+		header .logo {
+			transform: translate(0, -18px);
 		}
 
-		#cookieOK {
+		.logo.wrapper {
+			display: inline-flex;
+			background: #fff;
 			padding: 10px;
-			color: #111;
-			background: #ffe633;
-			width: 200px;
+		}
+
+		.logo>.container {
+			border: 3px solid #000;
+			padding: 30px 15px 15px 15px;
+		}
+
+		.logo .top {
+			margin-bottom: 0.1em;
+			font-size: 6em;
+			letter-spacing: -0.05em;
+			line-height: .8em;
 			text-align: center;
-			border-radius: 5px;
-			cursor: pointer;
+		}
+
+		.logo .mid {
+			font-size: 2em;
+			line-height: 1em;
+		}
+
+		.logo .bot {
+			font-size: 1.2em;
+			line-height: 1em;
+			letter-spacing: .1em;
+			text-align: center;
+		}
+
+		.nav {
+			float: right;
+			list-style: none;
+
+		}
+
+		.nav>li {
+			display: inline;
+		}
+
+		.nav>li>a {
+			position: relative;
+			color: #fff;
+			font-size: 1.5em;
+			text-decoration: none;
+			margin: 0 20px;
+			padding: 0 5px;
+			opacity: .5;
+			transition: opacity 0.2s ease-out;
+		}
+
+		.nav>li>a::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: #fff;
+			opacity: 0;
+			transition: opacity 0.2s ease-out;
+		}
+
+		.nav>li.active>a,
+		.nav>li>a:hover {
+			opacity: 1;
+		}
+
+		.nav>li.active>a::after,
+		.nav>li>a:hover::after {
+			opacity: 1;
+		}
+
+		/* Sections */
+		.section .content {
+			width: 100%;
+			height: 100%;
+		}
+
+		.section .box {
+			position: absolute;
+			z-index: 3;
+			padding: 20px;
+			width: 355px;
+			color: #fff;
+			font-size: .9em;
+			background: #ffffff0d;
+			border-top: 1px solid #ffffff82;
+			border-bottom: 1px solid #0000004f;
+			border-radius: 15px;
+			backdrop-filter: blur(10px);
+			transform-style: preserve-3d;
+		}
+
+		.section .price {
+			color: #edff6d;
+			text-shadow: 1px 0 black;
+			font-size: 1.7em;
+		}
+
+		.section .price.strike {
+			text-decoration: line-through;
+			font-size: 1em;
+			margin: 0 5px;
+		}
+
+		/* .section .box .box-content {
+			transform: translateZ(50px);
+		} */
+
+		.section .box .js-tilt-glare {
+			border-radius: 15px;
+		}
+
+
+		.btn-action {
+			padding: 3px 20px;
+			background: #edff6d;
+			border-radius: 15px;
+			color: #111;
+			font-size: 1.4em;
+			font-weight: bold;
+			transition: background .1s ease-out;
+		}
+
+		.btn-action:hover {
+			background: #bfcf46;
+			color: #111;
+		}
+
+		.chimSocola .content {
+			background: url(./assets/images/chim_socola.jpg) center no-repeat;
+			background-size: contain;
+		}
+
+		.chimSocola .box {
+			bottom: 10vh;
+			right: 8vw;
+			background: #4b151c59;
+		}
+
+
+		
+
+		/* Misc */
+		#fp-nav ul li a span,
+		.fp-slidesNav ul li a span {
+			background: #fff !important;
+		}
+
+		@media (orientation: portrait) {
+			.chimSocola .box {
+				bottom: 1vh;
+				left: calc(50% - 355px / 2);
+			}
 		}
 	</style>
-</head>
-<body>
-	<div id="annoyingBackground"></div>
 
-	<div class="center-container">
-		<h1 class="title">
-			:3
-		</h1>
+	<link rel="stylesheet" type="text/css" href="./assets/lib/fullpagejs/fullpage.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@300;400;500;700&display=swap"
+		rel="stylesheet">
+
+
+</head>
+
+<body>
+	<header>
+		<div class="screen container saira">
+			<div class="logo wrapper flex column center">
+				<div class="container">
+					<div class="top">
+						<span class="bold black">!</span>
+						<span class="bold pink">?</span>
+					</div>
+					<div class="mid">
+						<span class="medium black">V!T</span>
+						<span class="medium pink">?INK</span>
+					</div>
+					<div class="bot">
+						<span class="light">CHOCOLATE</span>
+					</div>
+				</div>
+			</div>
+
+			<ul class="nav" style="display: none">
+				<li data-menuanchor="chimSocola">
+					<a href="#chimSocola">CHIM SÔCÔLA</a>
+				</li>
+				<!-- <li data-menuanchor="cutSocola">
+					<a href="#cutSocola">CUT SÔCÔLA</a>
+				</li> -->
+			</ul>
+		</div>
+	</header>
+
+	<div class="main container">
+		<div class="section chimSocola" data-anchor="chimSocola" data-tooltip="CHIM SÔCÔLA">
+			<div class="content">
+				<div class="box" data-tilt data-tilt-glare data-tilt-max-glare="0.1" data-tilt-perspective="1000" data-tilt-full-page-listening data-tilt-reverse="true">
+					<div class="box-content">
+						<div class="flex" style="align-items: center; justify-content: space-between;">
+							<h1 class="title leaf saira" style="line-height: 1em;">CHIM SÔCÔLA</h1>
+							<div class="flex">
+								<h2 class="strike price saira light">250.000 VND</h2>
+								<h2 class="price saira light">190.000 VND</h2>
+							</div>
+						</div>
+	
+						<h3 class="subtitle wheat saira light">Kích thước: 15x4cm</h3>
+	
+						<p>
+							Hãy làm người yêu bất ngờ với món quà không thể lường trước được, và nhớ là chỉ để ăn và chia sẻ thôi không dùng vào việc gì khác nhé 😈
+						</p>
+						<p class="wheat saira">
+							<i>*Sản phẩm bán tại Hà Nội, những địa điểm khác vui lòng liên hệ để được hỗ trợ</i>
+						</p>
+	
+						<div class="send-message flex center column" style="width: 100%">
+							<a href="https://docs.google.com/forms/d/e/1FAIpQLSeVZU-5nhF7BD1iBhORSh8hqhtTB1busFpEHRIDl1yvXypruw/viewform" class="btn-action saira">
+								ĐẶT HÀNG NGAY
+							</a>
+							<!-- <span class="prepend" style="font-size: .em;">*Freeship</span> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="section cutSocola" data-anchor="cutSocola" data-tooltip="Cut Socola">
+			Yes, I'm working on it, support me pls
+		</div> -->
 	</div>
 
+	<script type="text/javascript" src="./assets/lib/fullpagejs/fullpage.min.js"></script>
+	<script type="text/javascript" src="./assets/lib/vanilla-tilt.min.js"></script>
+
 	<script>
-		// The Annoying Background
-		var colorList = [
-			'#EF5350', '#EC407A', '#AB47BC', '#7E57C2', '#5C6BC0', 
-			'#42A5F5', '#29B6F6', '#26C6DA', '#26A69A', '#66BB6A',
-			'#9CCC65', '#D4E157', '#FFEE58', '#FFCA28', '#FFA726',
-			'#9CCC65', '#D4E157', '#FFEE58', '#FFCA28', '#FFA726'
-		];
-		var divHeight = window.innerHeight / 5;
-		var annoyingBackground = document.getElementById('annoyingBackground');
-		// build_wall();
-		var annoyingBackground_interval = setInterval(() => {
-			annoyingBackground.innerHTML = "";
-			build_wall();
-		}, 30);
+		(() => {
+			class VitPink {
+				query = document.querySelector.bind(document)
+				queryAll = document.querySelectorAll.bind(document)
+				mainContainer = this.query('.main.container')
+				navItems = this.queryAll('.nav > li > a')
 
-		function build_wall() {
-			for (var i = 0; i < window.innerHeight; i += divHeight) {
-				build_wall_row(divHeight);
+				constructor() {
+					// this.showAdultSiteAlert()
+
+					this.fullpage = new fullpage('.main.container', {
+						anchors: ['chimSocola', 'cutSocola'],
+						// navigation: true,
+						sectionsColor: ['#dca19b', '#c3e8ed'],
+						menu: '.nav'
+					})
+
+					this.navItems.forEach(item => {
+						item.addEventListener('click', e => {
+							for (const item of this.navItems) {
+								item.classList.remove('active')
+							}
+							e.target.classList.add('active')
+						})
+					})
+				}
+
+				showAdultSiteAlert() {
+					if (!confirm("Sản phẩm sau đây yêu cầu người mua hàng trên 18 tuổi,\nBạn đồng ý xem chứ?\n\nThis following products require buyer over 18 years old,\nDo you want to continue?")) {
+						window.location = "about:blank"
+					}
+				}
 			}
-		}
 
-		function build_wall_row(height = 50) {
-			var curWidth = 0;
-			var maxWidth = window.innerWidth;
-
-			while (curWidth < maxWidth) {
-				do {
-					var tempWidth = parseInt(Math.random() * 100);
-				} while (tempWidth < 10);
-
-				// If new width is larger than maxwidth, add the remain to prevent overflow
-				tempWidth = Math.min(tempWidth, maxWidth - curWidth);
-				curWidth += tempWidth;
-
-				// Build the element from calculated width
-				var element = document.createElement('div');
-				element.style.backgroundColor = colorList[parseInt(Math.random() * 100 % colorList.length)];
-				element.style.width = tempWidth;
-				element.style.height = height;
-				element.style.cssFloat = 'left';
-				annoyingBackground.appendChild(element);
-			}
-		}
+				window.vitPink = new VitPink()
+			}) ()
 	</script>
 </body>
