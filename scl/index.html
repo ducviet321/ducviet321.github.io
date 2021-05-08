@@ -10,8 +10,17 @@
 			padding: 0;
 			overflow-y: hidden;
 			font-family: Arial, Helvetica, sans-serif;
+			font-size: 11pt;
 			background: #333;
-			/* Temp for dev */
+		}
+
+		a {
+			color: #edff6d;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #e4ff35;
 		}
 
 		h1, h2, h3, h4, h5 {
@@ -40,6 +49,10 @@
 
 		.pink {
 			color: #ff6d7d;
+		}
+
+		.leaf {
+			color: #edff6d;
 		}
 
 		.flex {
@@ -139,12 +152,12 @@
 			transition: opacity 0.2s ease-out;
 		}
 
-		.nav>li>a.active,
+		.nav>li.active>a,
 		.nav>li>a:hover {
 			opacity: 1;
 		}
 
-		.nav>li>a.active::after,
+		.nav>li.active>a::after,
 		.nav>li>a:hover::after {
 			opacity: 1;
 		}
@@ -156,31 +169,65 @@
 		}
 
 		.section .box {
-			z-index: 3;
 			position: absolute;
-			width: 350px;
-			background: rgb(255,255,255);
-			background: linear-gradient(45deg, rgba(195,195,195,0.7) 0%, rgba(255,255,255,0.7) 100%);
+			z-index: 3;
+			padding: 20px;
+			width: 310px;
+			color: #fff;
+			font-size: .9em;
+			background: #ffffff0d;
+			border-top: 1px solid #ffffff82;
+			border-bottom: 1px solid #0000004f;
+			border-radius: 15px;
 			backdrop-filter: blur(10px);
+			transform-style: preserve-3d;
 		}
 
-		.section .send-message {
-			
+		.section .price {
+			color: #edff6d;
+			text-shadow: 1px 0 black;
 		}
 
-		#chimSocola .content {
+		.section .price.strike {
+			text-decoration: line-through;
+			font-size: 1em;
+			margin: 0 5px;
+		}
+
+		/* .section .box .box-content {
+			transform: translateZ(50px);
+		} */
+
+		.section .box .js-tilt-glare {
+			border-radius: 15px;
+		}
+
+
+		.btn-action {
+			padding: 8px 20px;
+			background: #edff6d;
+			margin: 8px;
+			border-radius: 15px;
+			color: #111;
+			font-weight: bold;
+			transition: background .1s ease-out;
+		}
+
+		.btn-action:hover {
+			background: #bfcf46;
+			color: #111;
+		}
+
+		.chimSocola .content {
 			background: url(./assets/images/slide1.png) center no-repeat;
 			background-size: cover;
 		}
 
-		#chimSocola .box {
+		.chimSocola .box {
 			right: 10vw;
 			top: 50%;
-			transform: translateY(-50%);
-			padding: 20px;
-			border-radius: 15px;
-			color: #000;
 		}
+
 
 		
 
@@ -218,47 +265,55 @@
 			</div>
 
 			<ul class="nav">
-				<li>
-					<a href="#ch*mSocola" class="active">CH*M SÔCÔLA</a>
+				<li data-menuanchor="chimSocola">
+					<a href="#chimSocola">CHIM SÔCÔLA</a>
 				</li>
-				<li>
-					<a href="#c*tSocola">C*T SÔCÔLA</a>
-				</li>
+				<!-- <li data-menuanchor="cutSocola">
+					<a href="#cutSocola">CUT SÔCÔLA</a>
+				</li> -->
 			</ul>
 		</div>
 	</header>
 
 	<div class="main container">
-		<div class="section" id="chimSocola" data-tooltip="Ch*m Socola">
+		<div class="section chimSocola" data-anchor="chimSocola" data-tooltip="CHIM SÔCÔLA">
 			<div class="content">
-				<div class="box">
-					<div class="flex" style="align-items: center; justify-content: space-between;">
-						<h1 class="title saira" style="line-height: 1em;">SOCOLA</h1>
-						<h2 class="price pink saira light">190.000 VND</h2>
-					</div>
-
-					<h3 class="subtitle saira light">Height: 15cm</h3>
-
-					<p>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non hic suscipit ad modi consequuntur repudiandae 
-						excepturi est cupiditate fugiat, dolore optio esse ullam eum beatae quibusdam error. Dolores, autem repudiandae?
-					</p>
-
-					<div class="send-message saira flex center column" style="width: 100%">
-						<span class="prepend">FREE SHIP NOI THANH HA NOI</span>
-						<a href="#" class="action">
-							Send Message
-						</a>
+				<div class="box" data-tilt data-tilt-glare data-tilt-max-glare="0.1" data-tilt-perspective="1000" data-tilt-full-page-listening data-tilt-reverse="true">
+					<div class="box-content">
+						<div class="flex" style="align-items: center; justify-content: space-between;">
+							<h1 class="title leaf saira" style="line-height: 1em;">CHIM SÔCÔLA</h1>
+							<div class="flex">
+								<h2 class="strike price saira light">250.000 VND</h2>
+								<h2 class="price saira light">190.000 VND</h2>
+							</div>
+						</div>
+	
+						<h3 class="subtitle saira light">Kích thước: 15x4cm</h3>
+	
+						<p>
+							Hãy làm người yêu bất ngờ với món quà không thể lường trước được, và nhớ là chỉ để ăn và chia sẻ thôi không dùng vào việc gì khác nhé 😈
+						</p>
+						<p>
+							<i>*Lưu ý: Sản phẩm chỉ bán tại Hà Nội, những địa điểm khác vui lòng liên hệ để được hỗ trợ</i>
+						</p>
+	
+						<div class="send-message flex center column" style="width: 100%">
+							<a href="#" class="btn-action">
+								ĐẶT MUA NGAY
+							</a>
+							<!-- <span class="prepend" style="font-size: .em;">*Freeship</span> -->
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="section" id="cutSocola" data-tooltip="C*t Socola">
-			alo
-		</div>
+		<!-- <div class="section cutSocola" data-anchor="cutSocola" data-tooltip="Cut Socola">
+			Yes, I'm working on it, support me pls
+		</div> -->
 	</div>
 
 	<script type="text/javascript" src="./assets/lib/fullpagejs/fullpage.min.js"></script>
+	<script type="text/javascript" src="./assets/lib/vanilla-tilt.min.js"></script>
 
 	<script>
 		(() => {
@@ -270,9 +325,10 @@
 
 				constructor() {
 					this.fullpage = new fullpage('.main.container', {
-						anchors: ['ch*mSocola', 'c*tSocola'],
+						anchors: ['chimSocola', 'cutSocola'],
 						// navigation: true,
 						sectionsColor: ['#ffbbc2', '#c3e8ed'],
+						menu: '.nav'
 					})
 
 					this.navItems.forEach(item => {
