@@ -220,7 +220,7 @@
                     } else {
                         readable.unshift(`${item.id} (${item.role})`);
                     }
-                } else if (item.deleted === True) {
+                } else if (item.deleted === true) {
                     readable.push(`[deleted] (${item.role ? ' ' + item.role : ''})`);
                 } else if (item.emailAddress != owner.emailAddress) {
                     readable.push(`${item.displayName} (${item.emailAddress}${item.role ? ' ' + item.role : ''})`);
