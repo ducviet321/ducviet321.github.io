@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Meme Path</title>
+    <title>Meme Path ~</title>
   </head>
-  <body style="text-align: center">
+  <body style="text-align: center; background: #111;">
     <canvas id="unity-canvas" width=600 height=800 style="width: 600px; height: 800px; background: #231F20"></canvas>
     <script src="Build/Build.loader.js"></script>
     <script>
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Build.data.gz",
-        frameworkUrl: "Build/Build.framework.js.gz",
-        codeUrl: "Build/Build.wasm.gz",
+        dataUrl: "Build/Build.data.unityweb",
+        frameworkUrl: "Build/Build.framework.js.unityweb",
+        codeUrl: "Build/Build.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Vit Corp.",
         productName: "Meme Path",
