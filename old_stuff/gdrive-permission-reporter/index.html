@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Driana.</title>
+    <meta charset="utf-8" />
+    <link href="pun_intended.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.ico"/>
+</head>
+
+<body>
+    <div class="main container">
+        <div class="left container">
+            <img src="cam.jpg" alt="Cam" class="cam">
+            <div class="fade"></div>
+        </div>
+        <div class="right container">
+            <nav>
+                <div class="left logo">
+                    <span class="title">Driana.</span>
+                    <span class="subtitle">GDrive Permission Reporter</span>
+                </div>
+
+                                
+                <div class="right">
+                    <button id="authorize_button">Login</button>
+                    <button id="signout_button" style="display: none">Logout</button>
+                </div>
+            </nav>
+
+            <div class="intro container">
+                <div class="context container">
+                    <div class="captain">
+                        Scan Folder & Files in Google Drive
+                    </div>
+                    <p>
+                        Quickly finds out which files are being shared to whom.
+                    </p>
+                </div>
+
+                <div class="demo container">
+                    <img src="demo.png" alt="Google Drive Permission Reporter CSV" class="demo">
+                    <!-- <div class="fade"></div> -->
+                </div>
+            </div>
+
+            <div class="center container">
+                <input type="text" id="inputFolderId" placeholder="Paste your Google Drive Folder URL here...">
+                <button id="btnAnalyze">Analyze</button>
+            </div>
+
+            <div class="center container">
+                <a id="btnDownload" class="button" style="display: none">Download</a>
+            </div>
+
+            <div class="center container">
+                <pre id="content"></pre>
+            </div>
+
+
+            <div class="footer container">
+                <a href="privacy_policy.html">Privacy</a>
+                <a href="terms_and_conditions.html">Term of Services</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        // Client ID and API key from the Developer Console
+        const CLIENT_ID = '274239060584-ujkmiut9s3kksd2g2blqi4012snl474s.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyDYDWsFeICINME4NtkjnR_Y2GYjckAqdlA';
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+
+        let authorizeButton = document.getElementById('authorize_button');
+        let signoutButton = document.getElementById('signout_button');
+        let btnAnalyze = document.getElementById('btnAnalyze');
+        let btnDownload = document.getElementById('btnDownload');
+        let inputFolderId = document.getElementById('inputFolderId');
+        let preContent = document.getElementById('content');
+
+        const DEMO_SMALL_FOLDER_ID = '10UcP7sF_ElWNmhgZ_DdLSJF9i41fderV';
+        const DEMO_BIG_FOLDER_ID = '1vUAnF0mAarBDhi7RBbNbLYdIsihJXBpV';
+
+        const FILE_FIELDS = 'nextPageToken, files(name, webViewLink, owners, shared, permissions, modifiedTime, mimeType)';
+        const FOLDER_FIELDS = 'nextPageToken, files(id, name, webViewLink, mimeType)';
+
+        const MAX_QUERY_PER_CALL = 100;
+        const MAX_PAGE_SIZE = 100;
+
+        /**
+         *  On load, called to load the auth2 library and API client library.
+         */
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        /**
+         *  Initializes the API client library and sets up sign-in state
+         *  listeners.
+         */
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function() {
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                authorizeButton.onclick = handleAuthClick;
+                signoutButton.onclick = handleSignoutClick;
+                btnAnalyze.onclick = handleAnalyze;
+            }, function(error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        }
+
+        /**
+         *  Called when the signed in status changes, to update the UI
+         *  appropriately. After a sign-in, the API is called.
+         */
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+
+                let profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+                signoutButton.innerHTML = profile.getName() + ' • Logout'
+                // listFiles();
+                // handleAnalyze();
+            } else {
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+                signoutButton.innerHTML = 'Logout'
+            }
+        }
+
+        /**
+         *  Sign in the user upon button click.
+         */
+        function handleAuthClick(event, callback) {
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+                updateSigninStatus(true);
+                callback && callback();
+            });
+        }
+
+        /**
+         *  Sign out the user upon button click.
+         */
+        function handleSignoutClick(event) {
+            let auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                auth2.disconnect();
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+                $.post('/clearCookie');
+            });
+        }
+
+        /**
+         *  Prepare result as CSV
+         */
+        function prepareDownload() {
+            if (resultFiles.length === 0) {
+                appendPre('Warning: No file found. If you think this is an error, please make sure your account has access to given folder ID');
+                return;
+            }
+
+            let rows = [
+                ['Name', 'Type', 'Owner', 'Shared', 'Permissions', 'Link'] // Header
+            ];
+
+            let records = resultFiles.map(file => [
+                file.name,
+                file.mimeType,
+                `${file.owners[0].displayName} (${file.owners[0].emailAddress})`,
+                file.shared,
+                getReadablePermissionString(file.owners[0], file.permissions),
+                file.webViewLink,
+            ]);
+
+            let d = new Date();
+            let csvContent = rows.concat(records).map(e => '"' + e.join('","') + '"').join("\n");
+            let csvBlob = new Blob(["\ufeff", csvContent], {
+                type: 'text/csv'
+            });
+            let csvUrl = URL.createObjectURL(csvBlob);
+
+            btnDownload.setAttribute("href", csvUrl);
+            btnDownload.setAttribute("download",
+                `drive_analytic_result_${d.getFullYear()}_${(d.getMonth() + 1)}_${d.getDate()}_${d.getHours()}_${d.getMinutes()}.csv`);
+            btnDownload.classList.remove('disabled');
+            btnDownload.click();
+        }
+
+        function getReadablePermissionString(owner, permissions) {
+            let readable = [];
+            permissions && permissions.forEach(item => {
+                if (item.type != 'user') {
+                    if (item.type == 'anyone') {
+                        readable.unshift(`${item.id} (${item.role})`);
+                    } else if (item.type == 'domain') {
+                        readable.unshift(`${item.displayName} (${item.domain})`);
+                    } else if (item.type == 'group') {
+                        readable.unshift(`${item.displayName} (${item.emailAddress})`);
+                    } else {
+                        readable.unshift(`${item.id} (${item.role})`);
+                    }
+                } else if (item.deleted === true) {
+                    readable.push(`[deleted] (${item.role ? ' ' + item.role : ''})`);
+                } else if (item.emailAddress != owner.emailAddress) {
+                    readable.push(`${item.displayName} (${item.emailAddress}${item.role ? ' ' + item.role : ''})`);
+                }
+            });
+
+            return readable.join('; ');
+        }
+
+        /**
+         * Append a pre element to the body containing the given message
+         * as its text node. Used to display the results of the API call.
+         *
+         * @param {string} message Text to be placed in pre element.
+         */
+        function appendPre(message) {
+            let d = new Date();
+            preContent.prepend(`[${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}] ${message}\n`);
+        }
+
+        // Either read from URI or Folder ID
+        function smartGetFolderId() {
+            let result = /.*folders\/(.*)\/?/.exec(inputFolderId.value)
+
+            if (result) return result[1]
+
+            return inputFolderId.value
+        }
+
+        /**
+         * Analyze a single folders
+         * 1. Get all folders recursively
+         * 2. Get all files in folders
+         * 3. Export
+         */
+
+        let fo = resultFolders = [];
+        let fi = resultFiles = [];
+        let folderCount = 1;
+        let fileCount = 0;
+        async function handleAnalyze(event) {
+            if (authorizeButton.style.display === 'block') {
+                handleAuthClick(null, handleAnalyze);
+                return;
+            }
+
+            appendPre('Drive Analytic sequences initiated...');
+            let startTime = (new Date()).getTime();
+            let folderId = smartGetFolderId();
+            btnDownload.classList.add('disabled');
+            btnAnalyze.innerText = 'Analyzing...'
+
+            resultFolders = [{
+                id: folderId,
+            }];
+
+            resultFiles = [];
+            folderCount = 1;
+            fileCount = 0;
+
+            await listFolders();
+            await listFiles();
+            prepareDownload();
+
+            // console.log(resultFiles);
+
+            appendPre('Drive Analytic sequences finished.');
+            let totalTime = ((new Date()).getTime() - startTime) / 1000;
+            let totalMinute = Math.round(totalTime / 60 % 60);
+            let totalSecond = Math.round(totalTime % 60);
+            totalMinute = totalMinute > 9 ? totalMinute : '0' + totalMinute;
+            totalSecond = totalSecond > 9 ? totalSecond : '0' + totalSecond;
+
+            appendPre(`Total time ${totalMinute}:${totalSecond}`);
+
+            btnAnalyze.innerText = 'Analyze'
+        }
+
+
+        /**
+         * Get all Folders recursively
+         *
+         */
+
+        async function listFolders() {
+            let currentFolder = 0;
+
+            while (currentFolder < resultFolders.length) {
+                let endFolder = currentFolder + MAX_QUERY_PER_CALL;
+                if (endFolder >= resultFolders.length) {
+                    endFolder = resultFolders.length;
+                }
+
+                appendPre(`Processing folder ${currentFolder} > ${endFolder}`)
+
+                // Create query
+                let query = [];
+                for (let i = currentFolder; i < endFolder; i++) {
+                    query.push(`'${resultFolders[i].id}' in parents`)
+                }
+
+                query = `(${query.join(' or ')}) and mimeType = 'application/vnd.google-apps.folder' and trashed = false`;
+
+                try {
+                    await _listFolders(query, FOLDER_FIELDS)
+                } catch (err) {
+                    appendPre('Error: ' + err.result.error.message)
+                    appendPre('Unexpected error occurred while listing folders: ' + err);
+                    // console.log(err);
+                }
+
+                currentFolder = endFolder;
+            }
+        }
+
+        async function _listFolders(query, fields, pageToken = null) {
+            let options = {
+                'q': query,
+                'fields': fields,
+                'orderBy': 'name',
+                'pageSize': MAX_PAGE_SIZE,
+                'pageToken': pageToken,
+            }
+
+            // console.log(query);
+
+            await gapi.client.drive.files.list(options).then(async function(response) {
+                let files = response.result.files;
+
+                if (files === undefined) {
+                    appendPre('Unexpected response: ' + response.result);
+                    // console.log(response.result);
+                    return;
+                }
+
+                if (files.length > 0) {
+                    folderCount += files.length;
+                    appendPre(`Found ${folderCount} folder(s)`);
+                    // console.log(files);
+                }
+
+                resultFolders = resultFolders.concat(files);
+
+                if (response.result.nextPageToken) {
+                    await _listFolders(
+                        query,
+                        fields,
+                        response.result.nextPageToken
+                    );
+                }
+            });
+        }
+
+        /**
+         * Get all Files in given folders
+         *
+         */
+
+        async function listFiles() {
+            let currentFolder = 0;
+
+            while (currentFolder < resultFolders.length) {
+                let endFolder = currentFolder + MAX_QUERY_PER_CALL;
+                if (endFolder >= resultFolders.length) {
+                    endFolder = resultFolders.length;
+                }
+
+                appendPre(`Processing files in folder ${currentFolder} > ${endFolder}`)
+
+                // Create query
+                let query = [];
+                for (let i = currentFolder; i < endFolder; i++) {
+                    query.push(`'${resultFolders[i].id}' in parents`)
+                }
+
+                query = `(${query.join(' or ')}) and mimeType != 'application/vnd.google-apps.folder' and trashed = false`;
+
+                try {
+                    await _listFiles(query, FILE_FIELDS)
+                } catch (err) {
+                    appendPre('Error: ' + err.result.error.message)
+                    appendPre('Unexpected error occurred while listing files: ' + err);
+                    // console.log(err);
+                }
+
+                currentFolder = endFolder;
+            }
+        }
+
+        async function _listFiles(query, fields, pageToken = null) {
+            let options = {
+                'q': query,
+                'fields': fields,
+                'orderBy': 'name',
+                'pageSize': MAX_PAGE_SIZE,
+                'pageToken': pageToken,
+            }
+
+            // console.log(query);
+
+            await gapi.client.drive.files.list(options).then(async function(response) {
+                let files = response.result.files;
+
+                if (files === undefined) {
+                    appendPre('Unexpected response: ' + response.result);
+                    // console.log(response.result);
+                    return;
+                }
+
+                if (files.length > 0) {
+                    fileCount += files.length;
+                    appendPre(`Found ${fileCount} file(s)`);
+                    // console.log(files);
+                }
+
+                resultFiles = resultFiles.concat(files);
+
+                if (response.result.nextPageToken) {
+                    await _listFiles(
+                        query,
+                        fields,
+                        response.result.nextPageToken
+                    );
+                }
+            });
+        }
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</body>
+
+</html>
