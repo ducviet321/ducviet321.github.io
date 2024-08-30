@@ -1,5 +1,8 @@
 const banks = {
     "vit": {name: "HOANG DUC VIET", bank: "tpbank", number: "0399767192"},
+    "yen": {name: "HOANG THI HAI YEN", bank: "Sacombank", number: "00088666888333"},
+    "thao": {name: "TRAN THI THU THAO", bank: "Sacombank", number: "021125012002"},
+    "vu": {name: "TA TUAN VU", bank: "Sacombank", number: "6914072003"},
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -40,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             spendingItem.querySelector('.qr-btn').addEventListener('click', () => {
-                document.getElementById('qrDialog').showModal();
                 normalizedName = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const bankInfo = banks[normalizedName];
                 if (!bankInfo) {
@@ -48,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 document.getElementById('qrImage').src = `https://img.vietqr.io/image/${bankInfo.bank}-${bankInfo.number}-compact2.jpg?amount=${amount}&addInfo=dong%20gop%20quy%20cuu%20doi&accountName=${bankInfo.name}`;
+                document.getElementById('qrDialog').showModal();
             });
             
             spendingItem.querySelector('.remove-btn').addEventListener('click', () => {
