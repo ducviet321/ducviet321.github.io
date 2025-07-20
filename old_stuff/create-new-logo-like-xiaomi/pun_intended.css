@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Rubik:wght@300,700&display=swap');
+
+body, html {
+    padding: 0;
+    margin: 0;
+    color: #545b6d;
+    background: rgb(255 255 255);
+    background: linear-gradient(47deg, rgb(234 235 243) 0%, rgb(255 255 255) 100%);
+    font-family: 'Rubik', sans-serif;
+}
+
+button, a.button {
+    appearance: none;
+    border: none;
+    font-weight: bold;
+    padding: 13px 28px;
+    border-radius: 20px;
+    background: linear-gradient(47deg, rgb(104 170 254) 0%, rgb(21 105 224) 100%);    color: white;
+    margin-top: 35px;
+}
+
+button:hover {
+    cursor: pointer;
+    background: linear-gradient(47deg, rgb(214, 164, 118) 0%, rgb(221, 134, 58) 100%);
+}
+
+.main.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.left.container {
+    position: relative;
+    background: #161924;
+}
+
+.right.container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px 30px;
+}
+
+.logo .title {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: 'Abril Fatface', "Helvetica", sans-serif;
+}
+
+.logo {
+    color: #ff2a77;
+    font-size: .8em;
+}
+
+.io.container {
+    width: 100px;
+    height: 100px;
+}
+
+.io .wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: white;
+}
+
+.io .wrapper img {
+    width: 100%;
+}
+
+.input.container {
+    cursor: pointer;
+}
+
+.output .wrapper {
+    mask-image: url(mask.png);
+    mask-size: contain;
+    -webkit-mask-image: url(mask.png);
+    -webkit-mask-size: contain;
+    border-radius: 38px;
+}
+
+.input-file.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #c3a7c1b8;
+    display: none;
+}
+
+.input-file.container > span {
+    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-shadow: 2px 2px #ff4ef6;
+    font-weight: bold;
+}
+
+#inputFile {
+    position: relative;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+}
+
+
+.intro.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.context.container {
+    overflow: hidden;
+    flex: 1 0 auto;
+    text-align: center;
+    padding: 0 40px;
+}
+
+.context .captain {
+    font-size: 2em;
+    background: rgb(74 146 255);
+    background: linear-gradient(47deg, rgb(95 170 255) 0%, rgb(71 143 255) 50%, rgb(0 91 212) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eg{
+    color: #ddd;
+}
+
+.context p {
+    max-width: 670px;
+    font-size: .9em;
+}
+
+.context b {
+    color: #ddd;
+}
+
+img.demo {
+    width: 100%;
+}
+
+.demo.container {
+    position: relative;
+    width: 250px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.demo .fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: rgb(60,60,71);
+    background: linear-gradient(0deg, rgba(60,60,71,1) 40%, rgba(60,60,71,0) 100%);
+}
+
+.left .fade {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: rgb(60,60,71);
+    background: linear-gradient(-90deg, rgb(20 20 32 / 42%) 0%, rgb(255 255 255 / 0%) 40%);
+}
+
+.center.container {
+    display: flex;
+    justify-content: center;
+}
+
+.arrow-right {
+    height: 60px;
+    opacity: 0.1;
+    margin: 20px;
+}
+
+.footer.container {
+    margin-top: auto;
+    padding: 40px 0 10px 40px;
+}
+
+.footer a {
+    font-size: .8em;
+    color: #aaaab3;
+    margin-right: 15px;
+}

@@ -1,0 +1,232 @@
+:root {
+    --bg-primary: #c3f80c;
+    --bg-secondary: #f2f3f5;
+    --color-primary: #000000;
+}
+
+body {
+    font-family: 'Monaco', monospace;
+    background-color: rgb(240, 240, 240);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 8px 50px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+h1,
+h2 {
+    margin: 10px 0;
+}
+
+input {
+    width: 100%;
+    font-family: 'Monaco', monospace;
+    font-size: 2em;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #f2f3f5;
+}
+
+input::focus-visible {
+    width: 100%;
+    font-family: 'Monaco', monospace;
+    font-size: 2em;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+button {
+    width: 100%;
+    min-height: 40px;
+    margin: 5px 0;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(242 243 245);
+    color: #0a0a0a;
+    font-weight: bold;
+    box-shadow: 0 4px 12px 4px rgb(0 0 0 / 0%);
+}
+
+td>button {
+    min-width: 50px;
+    height: 30px;
+    min-height: 0;
+    width: auto;
+}
+
+#summary,
+#spending {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#summaryContent {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #9a9a9a;
+}
+
+.add-btn {
+    background: var(--bg-primary);
+    color: var(--color-primary);
+    font-size: .8em;
+}
+
+#addPersonBtn {
+    background: var(--bg-primary);
+    color: var(--color-primary);
+}
+
+.total {
+    border: 2px solid var(--color-primary);
+    font-weight: bold;
+}
+
+/*   Open state of the dialog  */
+dialog[open] {
+    opacity: 1;
+    transform: scaleY(1);
+    display: flex;
+}
+
+/*   Closed state of the dialog   */
+dialog {
+    position: relative;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 0.2s allow-discrete;
+    overflow: hidden;
+    border: none;
+    border-radius: 8px;
+    /* display: flex; */
+    flex-direction: column;
+    gap: 1em;
+}
+
+/*   Before-open state  */
+/* Needs to be after the previous dialog[open] rule to take effect,
+      as the specificity is the same */
+@starting-style {
+    dialog[open] {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Transition the :backdrop when the dialog modal is promoted to the top layer */
+dialog::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+    transition: all 0.7s allow-discrete;
+}
+
+dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 25%);
+}
+
+/* This starting-style rule cannot be nested inside the above selector
+  because the nesting selector cannot represent pseudo-elements. */
+@starting-style {
+    dialog[open]: :backdrop {
+        background-color: rgb(0 0 0 / 0%);
+    }
+}
+
+.dialog-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.amount {
+    width: 150px;
+    text-align: right;
+    position: relative;
+    padding-right: 10px;
+}
+
+.amount>span {
+    position: relative;
+    z-index: 2;
+}
+
+.progress {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 5px;
+    border: none;
+    color: var(--bg-primary);
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.progress>.fill {
+    background: var(--bg-primary);
+    height: 100%;
+}
+
+.amount-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5em;
+}
+
+.total-amount {
+    font-size: 5em;
+    line-height: 0.5em;
+    text-align: right;
+}
+
+#cancelBtn {
+    position: absolute;
+    top: -6px;
+    right: -2px;
+    width: 60px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#payBtn {
+    background-color: var(--bg-primary);
+    color: var(--color-primary);
+}
+
+#qrDialog {
+    height: 80dvh;
+    min-width: 100px;
+}
+
+#qrImage {
+    width: 80dvw;
+    height: auto;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    #qrImage {
+        width: auto;
+        height: 80dvh;
+        /* Allow the image to adjust its height based on the screen */
+        /* Make the image full width of the screen when width > height */
+    }
+}

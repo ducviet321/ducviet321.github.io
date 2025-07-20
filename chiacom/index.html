@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chia Cơm</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+	<div class="container">
+		<h2>Chia Cơm hiện lên và nói</h2>
+		
+		<table id="summary">
+			<tbody id="summaryContent"></tbody>
+		</table>
+		
+		<table id="spending">
+			<tbody id="spendingList"></tbody>
+		</table>
+
+		<button id="addPersonBtn">Thêm con nợ</button>
+		<button id="resetBtn">Xí xoá hết nợ</button>
+
+		<dialog id="inputDialog">
+			<input id="personInput" type="text" placeholder="Điền tên con nợ", autocomplete="off">
+			<div class="amount-buttons">
+				<button class="amount-btn" data-amount="5000">+5k</button>
+				<button class="amount-btn" data-amount="25000">+25k</button>
+				<button class="amount-btn" data-amount="30000">+30k</button>
+				<button class="amount-btn" data-amount="40000">+40k</button>
+			</div>
+			<div class="amount-buttons">
+				<button class="amount-btn" data-amount="100000">+100k</button>
+				<button class="amount-btn" id="clearBtn">🧹 Xin đi lại</button>
+			</div>
+			<div class="total-amount">=0k</div>
+			<div class="dialog-actions">
+				<button id="cancelBtn">X</button>
+				<button id="payBtn">Chi nè 🐛</button>
+			</div>
+		</dialog>
+
+		<dialog id="qrDialog">
+			<div>
+				<img id="qrImage" src="" alt="">
+			</div>
+		</dialog>
+	</div>
+
+	<script src="app.js"></script>
+</body>
+</html>
